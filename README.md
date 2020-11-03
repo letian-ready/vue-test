@@ -31,3 +31,7 @@ Engineering 工程化
 
 ### git router
 router all
+
+### git vuex
+vuex
+vue基础完成

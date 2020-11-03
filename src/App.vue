@@ -3,19 +3,30 @@
     <nav>
       <router-link to="/">首页</router-link>
       <router-link to="/admin">管理</router-link>
+
+      <span v-if="isLogin">
+      {{welcome}}
+      <button>注销</button>
+    </span>
+
     </nav>
     <!--    <img alt="Vue logo" src="./assets/logo.png">-->
     <!-- 路由出口 include="['admin']" -->
     <keep-alive include="admin">
       <router-view></router-view>
     </keep-alive>
-
   </div>
 </template>
 
 <script>
+import {mapState, mapGetters} from 'vuex'
+
 export default {
   name: 'App',
+  computed: {
+    ...mapState('user', ['isLogin']),
+    ...mapGetters('user', ['welcome'])
+  }
 }
 </script>
 
