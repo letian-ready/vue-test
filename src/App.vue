@@ -1,32 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <CourseList :courses="courses"></CourseList>
+    <nav>
+      <router-link to="/">首页</router-link>
+      <router-link to="/admin">管理</router-link>
+    </nav>
+    <!--    <img alt="Vue logo" src="./assets/logo.png">-->
+    <!-- 路由出口 include="['admin']" -->
+    <keep-alive include="admin">
+      <router-view></router-view>
+    </keep-alive>
+
   </div>
 </template>
 
 <script>
-import CourseList from '@/components/CourseList.vue'
-import {getCourses} from "@/api/course";
-
 export default {
   name: 'App',
-  components: {
-    CourseList
-  },
-  data() {
-    return {
-      title: '购物车',
-      course: '',
-      courses: [],
-    }
-  },
-  // created钩子中调用接口
-  async created(){
-    // 组件实例已创建，由于未挂载，dom不存在
-    const courses = await getCourses()
-    this.courses = courses
-  },
 }
 </script>
 
@@ -45,5 +34,13 @@ export default {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+.success {
+  background: #4fc08d;
+  border: 1px solid #42b983;
+}
+.warning {
+  background: #f66;
+  border: 1px solid #d63200;
 }
 </style>

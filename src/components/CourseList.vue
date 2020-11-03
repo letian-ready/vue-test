@@ -3,9 +3,15 @@
     <!-- 条件渲染 -->
     <p v-if="courses.length == 0">没有任何课程信息</p>
     <!-- 列表渲染 -->
-    <div class="course-list" v-else>
-      <div v-for="c in courses" :key="c.name" :style="{backgroundColor: selectedCourse === c ? '#ddd' : 'transparent'}" @click="selectedCourse = c">
-        {{ c.name }} - {{ c.price | currency("$") }}
+    <div :class="['course-list', $style.red]" v-else>
+      <div v-for="c in courses" :key="c.name"
+           :class="{[$style.active]: selectedCourse === c}"
+           @click= "onClick(c)">
+        {{ c.name }} - {{ c.price | currency("￥") }}
+      <!-- 动态路由匹配-->
+      <!-- <router-link :to="`/admin/course/${c.name}`">-->
+      <!-- {{ c.name }} - {{ c.price | currency("￥") }}-->
+      <!-- </router-link>-->
       </div>
     </div>
   </div>
@@ -26,17 +32,34 @@ export default {
       }
     }
   },
+  template: ``,
   filters: {
     currency(value, symbol = '￥') {
       return symbol + value
+    }
+  },
+  methods: {
+    onClick(c) {
+      this.selectedCourse = c;
+      // this.$router.push(`admin/course/${c.name}`)
+      this.$router.push({
+        name: 'detail',
+        params: {
+          name: c.name
+        }
+    })
+
     }
   }
 }
 
 </script>
 
-<style scoped>
+<style module>
 .active {
-  background-color: black;
+  background-color: #ddd;
+}
+.red {
+  color: #d63200;
 }
 </style>
