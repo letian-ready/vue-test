@@ -25,3 +25,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### git first
 CourseList"# vue-test" 
+
+### git Second
+Engineering 工程化
+
+### git router
+router all
